@@ -39,13 +39,15 @@ public class StudentController {
         try {
             studentService.addStudentTeacherPair(student, teacher);
             return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
-        } catch (StudentNameInvalidException ex) {
-            return new ResponseEntity<>("Student name is invalid:" + student, HttpStatus.NOT_FOUND);
-        } catch(TeacherInvalidException ex) {
+        }
+        catch (TeacherInvalidException ex) {
             return new ResponseEntity<>("Teacher name is invalid:" + teacher, HttpStatus.NOT_FOUND);
         }
         catch (RuntimeException ex) {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (StudentNameInvalidException ex) {
+            return new ResponseEntity<>("Student name is invalid:" + student, HttpStatus.NOT_FOUND);
         }
     }
 

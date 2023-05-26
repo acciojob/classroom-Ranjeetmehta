@@ -1,4 +1,4 @@
 package com.driver;
 
-public class TeacherInvalidException {
+public class TeacherInvalidException extends Throwable {
 }
