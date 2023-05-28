@@ -31,7 +31,7 @@ public class StudentService {
         }
 
     public Student getStudent(String name)  throws StudentNameInvalidException{
-        Optional<Student> studentOpt =new StudentRepository().getStudent(name);
+        Optional<Student> studentOpt =studentRepository.getStudent(name);
         if(studentOpt.isPresent()){
             return studentOpt.get();
 

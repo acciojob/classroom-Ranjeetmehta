@@ -35,17 +35,17 @@ public class StudentController {
     }
 
     @PutMapping("/add-student-teacher-pair")
-    public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher) {
+    public ResponseEntity<String> addStudentTeacherPair(@RequestParam String studentName, @RequestParam String teacherName) {
         try {
-            studentService.addStudentTeacherPair(student,teacher);
+            studentService.addStudentTeacherPair(studentName,teacherName);
             return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
         }
         catch (TeacherInvalidException ex) {
-            return new ResponseEntity<>("Teacher name is invalid:" + teacher, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Teacher name is invalid:" + teacherName, HttpStatus.NOT_FOUND);
         }
 
         catch (StudentNameInvalidException ex) {
-            return new ResponseEntity<>("Student name is invalid:" + student, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Student name is invalid:" + studentName, HttpStatus.NOT_FOUND);
         }
         catch (RuntimeException ex) {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,9 +57,10 @@ public class StudentController {
         try {
             Student student = studentService.getStudent(name); // Assign student by calling service layer method
 
-            return new ResponseEntity<>(student, HttpStatus.CREATED);
+            return new ResponseEntity<>(student, HttpStatus.OK);
         } catch (StudentNameInvalidException ex) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            ex.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
