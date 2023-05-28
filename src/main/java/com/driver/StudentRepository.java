@@ -45,7 +45,7 @@ public class StudentRepository {
     }
 
     public List<String> getAllStudents() {
-         new ArrayList<>(studentData.keySet());
+          return new ArrayList<>(studentData.keySet());
     }
 
     public void deleteStudent(String stud) {
@@ -55,7 +55,7 @@ public class StudentRepository {
     public void deleteTeacher(String teacher) {
         teacherData.remove(teacher);
         teacherStudentMap.remove(teacher);
-        new HashMap<>().remove();
+//        new HashMap<>().remove();
     }
 
     public List<String> getAllteachers() {

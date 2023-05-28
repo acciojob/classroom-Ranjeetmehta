@@ -15,7 +15,7 @@ public class StudentService {
 
     }
 
-    public void addStudentTeacherPair(String student, String teacher) throws StudentNameInvalidException,RuntimeException {
+    public void addStudentTeacherPair(String student, String teacher) throws  TeacherInvalidException, StudentNameInvalidException {
         Optional<Student> studentOpt=studentRepository.getStudent(student);
         Optional<Teacher> teacherOpt=studentRepository.getTeacher(teacher);
         if(studentOpt.isEmpty()) {
@@ -31,7 +31,7 @@ public class StudentService {
         }
 
     public Student getStudent(String name)  throws StudentNameInvalidException{
-        Optional<Student> studentOpt =new StudentRepository.getStudent(name);
+        Optional<Student> studentOpt =new StudentRepository().getStudent(name);
         if(studentOpt.isPresent()){
             return studentOpt.get();
 
